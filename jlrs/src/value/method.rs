@@ -68,16 +68,6 @@ impl<'frame> Method<'frame> {
         unsafe { Value::wrap((&*self.ptr()).sig) }
     }
 
-    /// List of potentially-ambiguous methods (nothing = none, Vector{Any} of TypeMapEntry otherwise)
-    pub fn ambiguous(self) -> Value<'frame, 'static> {
-        unsafe { Value::wrap((&*self.ptr()).ambig) }
-    }
-
-    /// Forward references to later items (typemap entries) which might sort before this one
-    pub fn resorted(self) -> Value<'frame, 'static> {
-        unsafe { Value::wrap((&*self.ptr()).resorted) }
-    }
-
     /// Table of all `Method` specializations, allocated as [hashable, ..., NULL, linear, ....]
     pub fn specializations(self) -> SimpleVector<'frame> {
         unsafe { SimpleVector::wrap((&*self.ptr()).specializations) }
